@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper - مین‌سویپر</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <h1 class="title">Minesweeper</h1>
+            <div class="header-stats">
+                <div class="stat-box" id="minesStat">
+                    <span class="stat-icon" aria-hidden="true">💣</span>
+                    <span class="stat-value" id="minesCount">0</span>
+                </div>
+                <div class="stat-box" id="timerStat">
+                    <span class="stat-icon" aria-hidden="true">⏱️</span>
+                    <span class="stat-value" id="timer">0</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="toolbar">
+                <div class="difficulty-selector" role="group" aria-label="سسطح دشواری">
+                    <button class="diff-btn" data-difficulty="beginner" aria-pressed="true">مبتدی</button>
+                    <button class="diff-btn" data-difficulty="intermediate" aria-pressed="false">متوسط</button>
+                    <button class="diff-btn" data-difficulty="expert" aria-pressed="false">حرفه‌ای</button>
+                    <button class="diff-btn" data-difficulty="custom" aria-pressed="false">سفارشی</button>
+                </div>
+
+                <button class="btn-newgame" id="newGameBtn" aria-label="بازی جدید">
+                    <span class="face" id="face">😊</span>
+                </button>
+            </div>
+
+            <div class="board-wrapper">
+                <div class="board" id="board" role="grid" aria-label="صفحه مین‌سویپر" tabindex="0"></div>
+            </div>
+
+            <div class="status" id="status" aria-live="polite"></div>
+        </main>
+
+        <!-- Custom Difficulty Modal -->
+        <dialog class="modal" id="customModal">
+            <div class="modal-content">
+                <h2>تنظیمات سفارشی</h2>
+                <div class="custom-fields">
+                    <div class="field">
+                        <label for="customRows">ردیف‌ها (۸-۳۰):</label>
+                        <input type="number" id="customRows" min="8" max="30" value="16">
+                    </div>
+                    <div class="field">
+                        <label for="customCols">ستون‌ها (۸-۳۰):</label>
+                        <input type="number" id="customCols" min="8" max="30" value="30">
+                    </div>
+                    <div class="field">
+                        <label for="customMines">تعداد مین‌ها (۱۰-۹۹۹):</label>
+                        <input type="number" id="customMines" min="10" max="999" value="99">
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="customCancel">انصراف</button>
+                    <button type="button" class="btn btn-primary" id="customApply">اعمال و شروع</button>
+                </div>
+            </div>
+        </dialog>
+
+        <!-- Game Over Modal -->
+        <dialog class="modal" id="gameOverModal">
+            <div class="modal-content">
+                <h2 id="gameOverTitle">بازی تمام شد</h2>
+                <p id="gameOverMessage"></p>
+                <div class="game-over-stats" id="gameOverStats"></div>
+                <div class="modal-actions">
+                    <button class="btn btn-primary" id="playAgainBtn">بازی مجدد</button>
+                </div>
+            </div>
+        </dialog>
+
+        <!-- Win Modal -->
+        <dialog class="modal" id="winModal">
+            <div class="modal-content win">
+                <div class="win-icon" aria-hidden="true">🏆</div>
+                <h2>تبریک! برنده شدید</h2>
+                <p>تمام مین‌ها را بدون خطا پیدا کردید.</p>
+                <div class="win-stats" id="winStats"></div>
+                <div class="modal-actions">
+                    <button class="btn btn-primary" id="nextGameBtn">بازی بعد</button>
+                </div>
+            </div>
+        </dialog>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
